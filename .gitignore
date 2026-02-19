@@ -1,0 +1,61 @@
+# EduNexus School — .gitignore
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ── Virtual Environment ──
+venv/
+.venv/
+env/
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Environment ──
+.env
+.env.local
+.env.prod
+backend/.env
+frontend/.env.local
+
+# ── Docker ──
+docker-compose.override.yml
+
+# ── Node.js ──
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-error.log*
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Logs ──
+*.log
+logs/
+
+# ── SSL Certs ──
+nginx/ssl/
+
+# ── Test & Coverage ──
+htmlcov/
+.coverage
+.pytest_cache/
+.mypy_cache/
+
+# ── Alembic ──
+alembic/versions/*.pyc

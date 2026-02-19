@@ -1,0 +1,3 @@
+"""
+EduNexus School — API Package
+"""

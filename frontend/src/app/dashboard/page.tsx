@@ -22,13 +22,10 @@ interface StatCard {
     gradient: string;
 }
 
-const ACTIVITY = [
-    { action: "New student enrolled", who: "Aiden Martinez", time: "2m ago", color: "#7C4DFF" },
-    { action: "Attendance marked", who: "Grade 9A — 45 students", time: "15m ago", color: "#00E5FF" },
-    { action: "Fee payment received", who: "₹37,500 — Johnson family", time: "1h ago", color: "#00E676" },
-    { action: "Exam scheduled", who: "Mathematics — Term 2", time: "3h ago", color: "#FFB74D" },
-    { action: "Teacher joined", who: "Prof. Sarah Williams", time: "1d ago", color: "#4ECDC4" },
-];
+const SCHOOL_INFO = {
+    director: "Mr. Ankur Gupta (B.H.U)",
+    address: "Near Alam Hospital, Hathwa Mor, Mirganj",
+};
 
 export default function DashboardPage() {
     const { user } = useAuthStore();
@@ -48,8 +45,8 @@ export default function DashboardPage() {
             setStats([
                 {
                     title: "Total Students",
-                    value: "1,247",
-                    trend: "+5.2%",
+                    value: "0",
+                    trend: "No data yet",
                     trendUp: true,
                     icon: <People sx={{ fontSize: 28 }} />,
                     color: "#7C4DFF",
@@ -57,8 +54,8 @@ export default function DashboardPage() {
                 },
                 {
                     title: "Teachers",
-                    value: "89",
-                    trend: "+2",
+                    value: "0",
+                    trend: "No data yet",
                     trendUp: true,
                     icon: <School sx={{ fontSize: 28 }} />,
                     color: "#00E5FF",
@@ -66,8 +63,8 @@ export default function DashboardPage() {
                 },
                 {
                     title: "Attendance Rate",
-                    value: "94.7%",
-                    trend: "+1.3%",
+                    value: "—",
+                    trend: "No data yet",
                     trendUp: true,
                     icon: <CheckCircle sx={{ fontSize: 28 }} />,
                     color: "#00E676",
@@ -75,8 +72,8 @@ export default function DashboardPage() {
                 },
                 {
                     title: "Fees Collected",
-                    value: "₹74,51,640",
-                    trend: "+12.5%",
+                    value: "₹0",
+                    trend: "No data yet",
                     trendUp: true,
                     icon: <CurrencyRupee sx={{ fontSize: 28 }} />,
                     color: "#FFB74D",
@@ -199,29 +196,36 @@ export default function DashboardPage() {
                     </Card>
                 </Grid>
 
-                {/* Recent activity */}
+                {/* School Info */}
                 <Grid item xs={12} md={5}>
                     <Card sx={{ height: "100%" }}>
                         <CardContent sx={{ p: 3 }}>
                             <Typography variant="h6" fontWeight={700} mb={3}>
-                                Recent Activity
+                                School Information
                             </Typography>
-                            {ACTIVITY.map((item, i) => (
-                                <Box key={i} sx={{ display: "flex", gap: 2, mb: 2.5, alignItems: "flex-start" }}>
-                                    <Box sx={{
-                                        width: 10, height: 10, borderRadius: "50%",
-                                        background: item.color, mt: 0.7, flexShrink: 0,
-                                        boxShadow: `0 0 8px ${item.color}80`,
-                                    }} />
-                                    <Box sx={{ flex: 1 }}>
-                                        <Typography variant="body2" fontWeight={500}>{item.action}</Typography>
-                                        <Typography variant="caption" color="text.secondary">{item.who}</Typography>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                                <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+                                    <Box sx={{ width: 10, height: 10, borderRadius: "50%", background: "#7C4DFF", mt: 0.7, flexShrink: 0, boxShadow: "0 0 8px rgba(124,77,255,0.8)" }} />
+                                    <Box>
+                                        <Typography variant="body2" fontWeight={500}>Director</Typography>
+                                        <Typography variant="caption" color="text.secondary">{SCHOOL_INFO.director}</Typography>
                                     </Box>
-                                    <Typography variant="caption" color="text.secondary" sx={{ flexShrink: 0 }}>
-                                        {item.time}
-                                    </Typography>
                                 </Box>
-                            ))}
+                                <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+                                    <Box sx={{ width: 10, height: 10, borderRadius: "50%", background: "#00E5FF", mt: 0.7, flexShrink: 0, boxShadow: "0 0 8px rgba(0,229,255,0.8)" }} />
+                                    <Box>
+                                        <Typography variant="body2" fontWeight={500}>Address</Typography>
+                                        <Typography variant="caption" color="text.secondary">{SCHOOL_INFO.address}</Typography>
+                                    </Box>
+                                </Box>
+                                <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+                                    <Box sx={{ width: 10, height: 10, borderRadius: "50%", background: "#00E676", mt: 0.7, flexShrink: 0, boxShadow: "0 0 8px rgba(0,230,118,0.8)" }} />
+                                    <Box>
+                                        <Typography variant="body2" fontWeight={500}>System Status</Typography>
+                                        <Typography variant="caption" color="#00E676">✓ Ready — Start by adding teachers and students</Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -235,10 +239,10 @@ export default function DashboardPage() {
                             </Typography>
                             <Grid container spacing={3}>
                                 {[
-                                    { label: "Classes Scheduled", value: 42, icon: <School />, color: "#7C4DFF" },
-                                    { label: "Teachers Present", value: 85, icon: <Groups />, color: "#00E5FF" },
-                                    { label: "Pending Assignments", value: 17, icon: <CheckCircle />, color: "#FFB74D" },
-                                    { label: "Fee Alerts", value: 6, icon: <CurrencyRupee />, color: "#FF5252" },
+                                    { label: "Classes Scheduled", value: 0, icon: <School />, color: "#7C4DFF" },
+                                    { label: "Teachers Present", value: 0, icon: <Groups />, color: "#00E5FF" },
+                                    { label: "Pending Assignments", value: 0, icon: <CheckCircle />, color: "#FFB74D" },
+                                    { label: "Fee Alerts", value: 0, icon: <CurrencyRupee />, color: "#FF5252" },
                                 ].map((item, i) => (
                                     <Grid item xs={6} sm={3} key={i}>
                                         <Box sx={{

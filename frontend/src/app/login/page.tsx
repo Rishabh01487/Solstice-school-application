@@ -132,6 +132,12 @@ export default function LoginPage() {
                     <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
                         Student Information System
                     </Typography>
+                    <Typography variant="caption" sx={{ color: "#8892A4", mt: 0.5, display: "block" }}>
+                        Director: <span style={{ color: "#FFD700" }}>Mr. Ankur Gupta (B.H.U)</span>
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: "#8892A4", display: "block" }}>
+                        📍 Near Alam Hospital, Hathwa Mor, Mirganj
+                    </Typography>
                 </Box>
 
                 <Card sx={{

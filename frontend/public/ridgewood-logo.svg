@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B4D3E"/>
+      <stop offset="100%" stop-color="#0F2D4A"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ECC71" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#3498DB" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="goldGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Shield base -->
+  <path d="M40 4 L68 14 L68 42 Q68 62 40 76 Q12 62 12 42 L12 14 Z"
+        fill="url(#shieldGrad)"
+        stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Shield inner border -->
+  <path d="M40 9 L63 18 L63 42 Q63 59 40 71 Q17 59 17 42 L17 18 Z"
+        fill="none"
+        stroke="#FFD70040" stroke-width="0.8"/>
+
+  <!-- Inner glow overlay -->
+  <path d="M40 12 L60 20 L60 42 Q60 57 40 68 Q20 57 20 42 L20 20 Z"
+        fill="url(#glowGrad)"/>
+
+  <!-- Book pages — left side -->
+  <path d="M26 32 L39 28 L39 54 Q33 56 26 54 Z"
+        fill="#1B6B3A" stroke="#2ECC71" stroke-width="0.6" opacity="0.9"/>
+  <!-- Book pages — right side -->
+  <path d="M54 32 L41 28 L41 54 Q47 56 54 54 Z"
+        fill="#0F3461" stroke="#3498DB" stroke-width="0.6" opacity="0.9"/>
+  <!-- Book spine -->
+  <rect x="38.5" y="27" width="3" height="28" rx="1"
+        fill="url(#goldGrad)" filter="url(#goldGlow)"/>
+  <!-- Book top lines -->
+  <line x1="29" y1="36" x2="38" y2="33" stroke="#2ECC7160" stroke-width="0.7"/>
+  <line x1="29" y1="40" x2="38" y2="37" stroke="#2ECC7160" stroke-width="0.7"/>
+  <line x1="29" y1="44" x2="38" y2="41" stroke="#2ECC7160" stroke-width="0.7"/>
+  <line x1="51" y1="36" x2="42" y2="33" stroke="#3498DB60" stroke-width="0.7"/>
+  <line x1="51" y1="40" x2="42" y2="37" stroke="#3498DB60" stroke-width="0.7"/>
+  <line x1="51" y1="44" x2="42" y2="41" stroke="#3498DB60" stroke-width="0.7"/>
+
+  <!-- Torch flame -->
+  <ellipse cx="40" cy="19" rx="4" ry="5.5"
+           fill="#FFD700" filter="url(#glow)" opacity="0.95"/>
+  <ellipse cx="40" cy="19" rx="2.5" ry="3.5"
+           fill="#FF8C00" opacity="0.8"/>
+  <ellipse cx="40" cy="20" rx="1.2" ry="2"
+           fill="#FFF3CD" opacity="0.9"/>
+
+  <!-- Torch handle -->
+  <rect x="38.5" y="22" width="3" height="7" rx="1"
+        fill="url(#goldGrad)"/>
+
+  <!-- Stars at bottom of shield -->
+  <circle cx="32" cy="62" r="1.2" fill="#FFD700" opacity="0.8"/>
+  <circle cx="40" cy="64" r="1.2" fill="#FFD700" opacity="0.9"/>
+  <circle cx="48" cy="62" r="1.2" fill="#FFD700" opacity="0.8"/>
+</svg>

@@ -28,11 +28,11 @@ export interface AttendanceRecord {
 }
 
 export const SCHOOL = {
-    name: "Solstice School",
+    name: "Ridgewood Educations",
     director: "Mr. Ankur Gupta (B.H.U)",
     address: "Near Alam Hospital, Hathwa Mor, Mirganj",
     phone: "+91-XXXXXXXXXX",
-    email: "info@solsticeschool.edu.in",
+    email: "info@ridgewoodinstitute.edu.in",
 };
 
 export const CLASSES = ["Nursery", "LKG", "UKG", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8"];

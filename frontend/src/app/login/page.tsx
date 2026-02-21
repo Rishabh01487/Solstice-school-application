@@ -28,10 +28,10 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 
 const DEMO_CREDENTIALS = [
-    { role: "Admin", email: "admin@edunexus.school", password: "admin123", color: "#FF6B6B" },
-    { role: "Teacher", email: "sarah.johnson@edunexus.school", password: "teacher123", color: "#4ECDC4" },
-    { role: "Student", email: "aiden.martinez@student.edunexus.school", password: "student123", color: "#45B7D1" },
-    { role: "Parent", email: "robert.martinez.parent@edunexus.school", password: "parent123", color: "#96CEB4" },
+    { role: "Admin", email: "ankurarchi@gmail.com", password: "ankurarchi", color: "#FF6B6B" },
+    { role: "Teacher", email: "teacher.ankurarchi@gmail.com", password: "ankurarchi", color: "#4ECDC4" },
+    { role: "Student", email: "student.ankurarchi@gmail.com", password: "ankurarchi", color: "#45B7D1" },
+    { role: "Parent", email: "parent.ankurarchi@gmail.com", password: "ankurarchi", color: "#96CEB4" },
 ];
 
 export default function LoginPage() {

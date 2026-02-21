@@ -95,13 +95,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } catch {
             // Fallback: demo mode when backend is unavailable
             const DEMO_USERS: Record<string, { full_name: string; role: "admin" | "teacher" | "student" | "parent" }> = {
-                "admin@edunexus.school": { full_name: "Admin User", role: "admin" },
-                "sarah.johnson@edunexus.school": { full_name: "Prof. Sarah Johnson", role: "teacher" },
-                "aiden.martinez@student.edunexus.school": { full_name: "Aiden Martinez", role: "student" },
-                "robert.martinez.parent@edunexus.school": { full_name: "Robert Martinez", role: "parent" },
+                "ankurarchi@gmail.com": { full_name: "Admin User", role: "admin" },
+                "teacher.ankurarchi@gmail.com": { full_name: "Prof. Sarah Johnson", role: "teacher" },
+                "student.ankurarchi@gmail.com": { full_name: "Aiden Martinez", role: "student" },
+                "parent.ankurarchi@gmail.com": { full_name: "Robert Martinez", role: "parent" },
             };
             const demoUser = DEMO_USERS[email];
-            if (demoUser && (password === "admin123" || password === "teacher123" || password === "student123" || password === "parent123")) {
+            if (demoUser && password === "ankurarchi") {
                 // Create a demo session
                 const mockUser = {
                     id: `demo-${demoUser.role}`,

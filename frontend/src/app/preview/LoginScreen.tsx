@@ -21,9 +21,9 @@ export default function LoginScreen({ onLogin }: Props) {
     const [googlePick, setGooglePick] = useState(false); const [gLoading, setGLoading] = useState(false);
 
     const login = () => {
-        if (email === "admin@solstice.school" && pass === "admin123") return onLogin("admin", email);
-        if (email.endsWith("@teacher.solstice.school") && pass === "teacher123") return onLogin("teacher", email);
-        if (email.endsWith("@parent.solstice.school") && pass === "parent123") return onLogin("parent", email);
+        if (email === "ankurarchi@gmail.com" && pass === "ankurarchi") return onLogin("admin", email);
+        if (email === "teacher.ankurarchi@gmail.com" && pass === "ankurarchi") return onLogin("teacher", email);
+        if (email === "parent.ankurarchi@gmail.com" && pass === "ankurarchi") return onLogin("parent", email);
         setErr("Invalid credentials. Check demo accounts below.");
     };
 
@@ -39,7 +39,7 @@ export default function LoginScreen({ onLogin }: Props) {
     };
 
     const googleRole = (role: Role) => {
-        const emails: Record<string, string> = { admin: "admin@solstice.school", teacher: "sarah@teacher.solstice.school", parent: "robert@parent.solstice.school" };
+        const emails: Record<string, string> = { admin: "ankurarchi@gmail.com", teacher: "teacher.ankurarchi@gmail.com", parent: "parent.ankurarchi@gmail.com" };
         onLogin(role, emails[role!] || "");
     };
 
@@ -76,9 +76,9 @@ export default function LoginScreen({ onLogin }: Props) {
 
                     <Divider sx={{ mb: 2 }}><Chip label="Demo Accounts" size="small" /></Divider>
                     <Box sx={{ p: 1.5, borderRadius: 2, background: "#FEF2F2", fontSize: "0.72rem", lineHeight: 2.2, color: "#6B7280" }}>
-                        <b style={{ color: RED }}>Admin:</b> admin@solstice.school / admin123<br />
-                        <b style={{ color: RED }}>Teacher:</b> sarah@teacher.solstice.school / teacher123<br />
-                        <b style={{ color: RED }}>Parent:</b> robert@parent.solstice.school / parent123
+                        <b style={{ color: RED }}>Admin:</b> ankurarchi@gmail.com / ankurarchi<br />
+                        <b style={{ color: RED }}>Teacher:</b> teacher.ankurarchi@gmail.com / ankurarchi<br />
+                        <b style={{ color: RED }}>Parent:</b> parent.ankurarchi@gmail.com / ankurarchi
                     </Box>
                 </CardContent>
             </Card>

@@ -54,8 +54,8 @@ apiClient.interceptors.response.use(
 export const authApi = {
     login: (email: string, password: string) =>
         apiClient.post("/api/v1/auth/login", { email, password }),
-    loginWithFirebase: (firebase_token: string) =>
-        apiClient.post("/api/v1/auth/firebase-login", { firebase_token }),
+    loginWithFirebase: (id_token: string) =>
+        apiClient.post("/api/v1/auth/login/firebase", { id_token }),
     logout: () => apiClient.post("/api/v1/auth/logout"),
     me: () => apiClient.get("/api/v1/auth/me"),
 };

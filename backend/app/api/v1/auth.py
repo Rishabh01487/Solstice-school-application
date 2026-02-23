@@ -17,6 +17,8 @@ from app.schemas.auth import (
     RefreshTokenRequest,
     TokenResponse,
     UserResponse,
+    FirebaseLoginRequest,
+    RegisterRequest
 )
 from app.api.deps import get_current_user
 from app.utils.security import (
@@ -26,7 +28,9 @@ from app.utils.security import (
     hash_password,
     verify_password,
 )
+from app.utils.firebase import verify_firebase_token
 from app.config import get_settings
+from app.models.user import UserRole
 
 settings = get_settings()
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -74,6 +78,118 @@ async def login(body: LoginRequest, db: AsyncSession = Depends(get_db)):
     # Update last login
     user.last_login = datetime.utcnow()
 
+    await db.flush()
+
+    return TokenResponse(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer",
+        expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+    )
+
+
+@router.post("/register", response_model=TokenResponse)
+async def register(body: RegisterRequest, db: AsyncSession = Depends(get_db)):
+    """Register a new user with email and password."""
+    # Check if email exists
+    result = await db.execute(select(User).where(User.email == body.email))
+    if result.scalar_one_or_none():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email is already registered"
+        )
+        
+    user = User(
+        email=body.email,
+        password_hash=hash_password(body.password),
+        role=body.role,
+        first_name=body.first_name,
+        last_name=body.last_name,
+        phone=body.phone,
+        is_active=True
+    )
+    db.add(user)
+    await db.flush()
+    
+    token_data = {
+        "sub": str(user.id),
+        "role": user.role.value,
+        "email": user.email,
+    }
+    access_token = create_access_token(token_data)
+    refresh_token, refresh_expires = create_refresh_token(token_data)
+
+    db_refresh = RefreshToken(
+        user_id=user.id,
+        token=refresh_token,
+        expires_at=refresh_expires,
+    )
+    db.add(db_refresh)
+    user.last_login = datetime.utcnow()
+    await db.flush()
+
+    return TokenResponse(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer",
+        expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+    )
+
+
+@router.post("/login/firebase", response_model=TokenResponse)
+async def login_firebase(body: FirebaseLoginRequest, db: AsyncSession = Depends(get_db)):
+    """
+    Authenticate with Firebase ID token (Google Login).
+    If the user does not exist, they are automatically registered.
+    """
+    try:
+        decoded = verify_firebase_token(body.id_token)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Invalid Firebase token: {str(e)}"
+        )
+        
+    email = decoded.get("email")
+    if not email:
+        raise HTTPException(status_code=400, detail="Token has no email")
+        
+    result = await db.execute(select(User).where(User.email == email))
+    user = result.scalar_one_or_none()
+    
+    if not user:
+        # Auto-register new user
+        name_parts = decoded.get("name", "New User").split(" ", 1)
+        first_name = name_parts[0]
+        last_name = name_parts[1] if len(name_parts) > 1 else ""
+        
+        user = User(
+            email=email,
+            password_hash=hash_password("oauth_placeholder"),
+            role=body.role_preference or UserRole.STUDENT,
+            first_name=first_name,
+            last_name=last_name,
+            avatar_url=decoded.get("picture"),
+            is_active=True
+        )
+        db.add(user)
+        await db.flush()
+        
+    # generate tokens
+    token_data = {
+        "sub": str(user.id),
+        "role": user.role.value,
+        "email": user.email,
+    }
+    access_token = create_access_token(token_data)
+    refresh_token, refresh_expires = create_refresh_token(token_data)
+
+    db.add(RefreshToken(
+        user_id=user.id,
+        token=refresh_token,
+        expires_at=refresh_expires,
+    ))
+    user.last_login = datetime.utcnow()
     await db.flush()
 
     return TokenResponse(

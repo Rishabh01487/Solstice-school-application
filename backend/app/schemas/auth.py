@@ -18,6 +18,11 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str = Field(..., min_length=6)
 
+class FirebaseLoginRequest(BaseModel):
+    """Firebase ID token login/registration."""
+    id_token: str
+    role_preference: Optional[UserRole] = None
+
 
 class RefreshTokenRequest(BaseModel):
     """Refresh token for rotation."""

@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.api.v1.router import api_router
+from app.utils.firebase import init_firebase
 
 settings = get_settings()
 
@@ -19,6 +20,7 @@ async def lifespan(app: FastAPI):
     """Application startup/shutdown lifecycle."""
     # Startup
     print(f"🚀 {settings.APP_NAME} starting up...")
+    init_firebase()
     yield
     # Shutdown
     print(f"👋 {settings.APP_NAME} shutting down...")

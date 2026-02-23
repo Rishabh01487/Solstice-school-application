@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     ALLOWED_ORIGINS: str = "http://localhost:3000"
 
+    # ── Firebase ──
+    FIREBASE_PROJECT_ID: str = "ridgewood-educations"
+    FIREBASE_CREDENTIALS_BASE64: str = ""
+
     # ── Database ──
     DATABASE_URL: str = "postgresql+asyncpg://edunexus:edunexus_pass@db:5432/edunexus"
     DATABASE_URL_SYNC: str = "postgresql://edunexus:edunexus_pass@db:5432/edunexus"
